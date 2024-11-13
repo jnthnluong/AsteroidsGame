@@ -45,8 +45,9 @@ class Spaceship extends Floater
     myColor = color(50,130,149);
     myCenterX = width/2;
     myCenterY = height/2;
-    myXspeed = 5;
-    myYspeed = 5;
+    myXspeed = 0;
+    myYspeed = 0;
     myPointDirection = 90;
   }
+  
 }
