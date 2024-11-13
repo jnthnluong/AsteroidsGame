@@ -70,4 +70,19 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
     rotate(-1*dRadians);
     translate(-1*(float)myCenterX, -1*(float)myCenterY);
   }
+  // my additions to the floater class (mainly getters and setters) 
+  // ALSO there are only getters if i ever want to get a specific speed
+  public void setXspeed(double speed){
+    myXspeed = speed;
+    
+  }
+  public void setYspeed(double speed){
+    myYspeed = speed;
+  }
+  public double getYspeed(){
+    return myYspeed;
+  }
+  public double getXspeed(){
+    return myXspeed;
+  }
 } 
