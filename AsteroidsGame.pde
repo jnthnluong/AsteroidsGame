@@ -27,7 +27,7 @@ public void draw()
   Ball.show();
 }
 public void keyPressed(){
-  System.out.println(keyCode);
+  //System.out.println(keyCode);
   if(keyCode == 87){
     Ball.accelerate(-2.5);
   }
