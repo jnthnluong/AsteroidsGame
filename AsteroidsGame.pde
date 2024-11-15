@@ -1,4 +1,5 @@
-//your variable declarations here
+  //your variable declarations here
+Star [] backgroundStars = new Star [400];
 Spaceship Ball;
 public void setup() 
 {
@@ -9,11 +10,18 @@ public void setup()
   Ball = new Spaceship();
   Ball.setXspeed(0);
   Ball.setYspeed(0);
+  for(int i = 0; i <backgroundStars.length; i++){
+    backgroundStars[i] = new Star();
+  }
 }
 
 public void draw() 
 {
   background(0);
+  for(int i = 0; i < backgroundStars.length; i++){
+    backgroundStars[i].move();
+    backgroundStars[i].show();
+  }
   //your code here
   Ball.move();
   Ball.show();
@@ -31,11 +39,17 @@ public void keyPressed(){
   }
   if(keyCode == 83){
     //check if ball has a non 0 speed then start dropping it toward 0?? this might not work bc the spaceship rotates and its movement is a little funny
-    if(Ball.getXspeed() != 0){
+    //if(Ball.getXspeed() != 0){
       Ball.accelerate(2.5);
-    }
-    
+   // }  
   }
+  if(keyCode == 32){
+      Ball.setXspeed(0);
+      Ball.setYspeed(0);
+      Ball.setCenterX((Math.random()*width));
+      Ball.setCenterY((Math.random()*height));
+      Ball.setDirection(Math.random()*360);
+    }
   /*
   key codes
   w = 87
