@@ -1,20 +1,21 @@
 class Star //note that this class does NOT extend Floater
-{
+{ // remember to update this on github!
   //your code here
-  double myX, myY;
-  color myColor;
+  private double myX, myY;
+  private color myColor;
 
-  Star() {
+  public Star() {
     myX = (Math.random()*width);
     myY = (Math.random()*height);
-    myColor = color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
+    myColor = color(255);
   }
-  void show() {
+  public void show() {
     fill(myColor);
-    ellipse((float)myX, (float)myY, 5, 5);
+
+    ellipse((float)myX, (float)myY, 5/2, 5/2);
   }
-  void move() {
-    myX += (Math.random()*0.001-0.0005);
-    myY += (Math.random()*0.001-0.0005);
+  public void move() { // very subtle star movement, also gives a "glistening" effect/flashing stars
+    myX += (Math.random()*0.1-0.05);
+    myY += (Math.random()*0.1-0.05);
   }
 }
