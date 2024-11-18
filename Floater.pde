@@ -46,8 +46,9 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   }   
   public void show ()  //Draws the floater at the current position  
   {             
-    fill(myColor);   
-    stroke(myColor);    
+    fill(myColor);
+    //noFill();
+    stroke(0);    
 
     //translate the (x,y) center of the ship to the correct position
     translate((float)myCenterX, (float)myCenterY);
