@@ -27,21 +27,20 @@ public void draw()
   Ball.show();
 }
 public void keyPressed(){
-  //System.out.println(keyCode);
-  if(keyCode == 87){
+  System.out.println(key);
+  if(key == 'w' || key == 'W'){
     Ball.accelerate(-2.5);
   }
-  if(keyCode == 65){
-    Ball.turn(-10);
+  if(key == 'd' || key == 'D'){
+    Ball.turn(5);
   }
-  if(keyCode == 68){
-    Ball.turn(10);
+  if(key == 'a' || key == 'A'){
+    Ball.turn(-5);
   }
-  if(keyCode == 83){
-    //check if ball has a non 0 speed then start dropping it toward 0?? this might not work bc the spaceship rotates and its movement is a little funny
-    //if(Ball.getXspeed() != 0){
+  if(key == 's' || key == 'S'){
+    
       Ball.accelerate(2.5);
-   // }  
+   
   }
   if(keyCode == 32){
       Ball.setXspeed(0);
