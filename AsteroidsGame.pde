@@ -1,12 +1,18 @@
 //your variable declarations here
 Star [] backgroundStars = new Star [400];
 Spaceship Ball;
+public boolean rotatingR = false;
+public boolean rotatingL = false;
+public boolean movingF = false;
+public boolean movingB = false;
+Asteroid scaryBall;
 public void setup() 
 {
   size(800, 800);
   background(0);
   //Loop();
   //your code here
+  scaryBall = new Asteroid();
   Ball = new Spaceship();
   Ball.setXspeed(0);
   Ball.setYspeed(0);
@@ -23,25 +29,55 @@ public void draw()
     backgroundStars[i].move();
     backgroundStars[i].show();
   }
+  if(rotatingR){
+    Ball.turn(5);
+  }
+  if(rotatingL){
+    Ball.turn(-5);
+  }
+  if(movingF){
+    Ball.accelerate(-0.25);
+  }
+  if(movingB){
+    Ball.accelerate(0.25);
+  }
   //your code here
   Ball.move();
   Ball.show();
+  scaryBall.move();
+  scaryBall.show();
+}//-7 , 13
+public void keyReleased(){
+  if(key == 'd' || key == 'D'){
+    rotatingR = false;
+  }
+  if(key == 'a' || key == 'A'){
+    rotatingL = false;
+  }
+  if(key == 'w' || key == 'W'){
+    movingF = false;
+  }
+  if(key == 's' || key == 'S'){
+    movingB = false;
+  }
 }
 public void keyPressed() {
   //System.out.println(key);
   if (key == 'w' || key == 'W') {
-    Ball.accelerate(-2.5);
+   //Ball.accelerate(-2.5);
+    movingF = true;
   }
   if (key == 'd' || key == 'D') {
-    Ball.turn(5);
+    //Ball.turn(5);
+    rotatingR = true;
   }
   if (key == 'a' || key == 'A') {
-    Ball.turn(-5);
+    //Ball.turn(-5);
+    rotatingL = true;
   }
   if (key == 's' || key == 'S') {
-
-    Ball.accelerate(2.5);
-  }
+    movingB = true;
+  }  
   if (keyCode == 32) { //spacebar
     fill(Ball.getColor(),100 );
     Ball.setXspeed(0);
