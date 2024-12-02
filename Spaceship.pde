@@ -143,6 +143,21 @@ class Spaceship extends Floater
       vertex(xCorners[nI], yCorners[nI]);
     }
     endShape(CLOSE);
+    if(movingF){
+      stroke(247,161,47);
+      fill(247,161,47);
+    
+      //line(15,5,40,5);
+      rect(15,10,25,2.5);
+      rect(15,-10,25,2.5);
+    }
+    if(movingB){
+      stroke(247,161,47);
+      fill(247,161,47);
+      
+      rect(-40,15,25,2.5);
+      rect(-40,-15,25,2.5);
+    }
 
     //"unrotate" and "untranslate" in reverse order
     rotate(-1*dRadians);
