@@ -96,12 +96,7 @@ class Spaceship extends Floater
     myYspeed = 0;
     myPointDirection = 90;
   }
-  public void accelerate (double dAmount)    //copy from floater
-  {          
-    super.accelerate(dAmount);
-    if (dAmount < 0) movingF = true;
-    if (dAmount > 1) movingB = true;
-  }   
+ 
 
   // my additions to the floater class (mainly getters and setters) 
   // ALSO there are only getters if i ever want to get a specific speed
