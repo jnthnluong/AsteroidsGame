@@ -1,10 +1,10 @@
+
 //your variable declarations here
 Star [] backgroundStars = new Star [400];
 Spaceship Ball;
 public boolean rotatingR = false;
 public boolean rotatingL = false;
-public boolean movingF = false;
-public boolean movingB = false;
+
 Asteroid scaryBall;
 public void setup() 
 {
@@ -35,11 +35,11 @@ public void draw()
   if(rotatingL){
     Ball.turn(-5);
   }
-  if(movingF){
-    Ball.accelerate(-0.25);
+  if(Ball.isForward()){
+    Ball.accelerate(-0.25/2);
   }
-  if(movingB){
-    Ball.accelerate(0.25);
+  if(Ball.isBackward()){
+    Ball.accelerate(0.25/2);
   }
   //your code here
   Ball.move();
@@ -55,17 +55,17 @@ public void keyReleased(){
     rotatingL = false;
   }
   if(key == 'w' || key == 'W'){
-    movingF = false;
+    Ball.setForward(false);
   }
   if(key == 's' || key == 'S'){
-    movingB = false;
+    Ball.setBackward(false);
   }
 }
 public void keyPressed() {
   //System.out.println(key);
   if (key == 'w' || key == 'W') {
    //Ball.accelerate(-2.5);
-    movingF = true;
+    Ball.setForward(true);
   }
   if (key == 'd' || key == 'D') {
     //Ball.turn(5);
@@ -76,7 +76,7 @@ public void keyPressed() {
     rotatingL = true;
   }
   if (key == 's' || key == 'S') {
-    movingB = true;
+    Ball.setBackward(true);
   }  
   if (keyCode == 32) { //spacebar
     fill(Ball.getColor(),100 );
