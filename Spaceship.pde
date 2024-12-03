@@ -11,41 +11,42 @@ class Spaceship extends Floater
    protected double myXspeed, myYspeed; //holds the speed of travel in the x and y directions   
    protected double myPointDirection; //holds current direction the ship is pointing in degrees    
    */
-   
+  private boolean movingF, movingB;
 
   public Spaceship() {
-    
+    movingF = false;
+    movingB = false;
     corners = 9;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    
+
     xCorners[0] = -50/2;
     yCorners[0] = 50/2;
-    
+
     xCorners[1] = 50/2;
     yCorners[1] = 0;
-    
+
     xCorners[2] = -50/2;
     yCorners[2] = -50/2;
-    
+
     xCorners[3] = 0;
     yCorners[3] = 50/2;
-    
+
     xCorners[4] = 50/2;
     yCorners[4] = -50/2;
-    
+
     xCorners[5] = -120/2; // tip of the spaceship
     yCorners[5] = 0;
-    
+
     xCorners[6] = 50/2;
     yCorners[6] = 50/2;
-    
+
     xCorners[7] = 0;
     yCorners[7] = -50/2;
-    
+
     xCorners[8] = -50/2;
     yCorners[8] = 50/2;
-    
+
     //xCorners[1] = 0;
     // yCorners[1] = 60;
     /*
@@ -85,9 +86,9 @@ class Spaceship extends Floater
 
 
 
-    myColor = color(175,168,168);
+    myColor = color(175, 168, 168);
     //198,88,88 redish vermilion color
-    
+
 
     myCenterX = width/2;
     myCenterY = height/2;
@@ -95,6 +96,13 @@ class Spaceship extends Floater
     myYspeed = 0;
     myPointDirection = 90;
   }
+  public void accelerate (double dAmount)    //copy from floater
+  {          
+    super.accelerate(dAmount);
+    if (dAmount < 0) movingF = true;
+    if (dAmount > 1) movingB = true;
+  }   
+
   // my additions to the floater class (mainly getters and setters) 
   // ALSO there are only getters if i ever want to get a specific speed
   public void setXspeed(double speed) {
@@ -118,10 +126,22 @@ class Spaceship extends Floater
   public void setDirection(double direction) {
     myPointDirection = direction;
   }
-  public color getColor(){
+  public color getColor() {
     return myColor;
   }
-  public void show ()  //copy of show from floater to create jets and hyperspace animations
+  public boolean isForward(){
+    return movingF;
+  }
+  public boolean isBackward(){
+    return movingB;
+  }
+  public void setForward(boolean x){
+    movingF = x;
+  }
+  public void setBackward(boolean x){
+    movingB = x;
+  }
+   public void show ()  //copy of show from floater to create jets and hyperspace animations
   {             
     fill(myColor);
     //noFill();
@@ -143,6 +163,7 @@ class Spaceship extends Floater
       vertex(xCorners[nI], yCorners[nI]);
     }
     endShape(CLOSE);
+    
     if(movingF){
       stroke(247,161,47);
       fill(247,161,47);
