@@ -2,6 +2,7 @@
 //your variable declarations here
 Star [] backgroundStars = new Star [400];
 Spaceship Ball;
+ArrayList<Asteroid> deathBall = new ArrayList<Asteroid>();
 public boolean rotatingR = false;
 public boolean rotatingL = false;
 
@@ -16,6 +17,7 @@ public void setup()
   Ball = new Spaceship();
   Ball.setXspeed(0);
   Ball.setYspeed(0);
+  
   for (int i = 0; i <backgroundStars.length; i++) {
     backgroundStars[i] = new Star();
   }
@@ -23,8 +25,17 @@ public void setup()
 
 public void draw() 
 {
-  
+  if((int)(Math.random()*50) == 1){
+    deathBall.add(new Asteroid());
+    
+  }
   background(0);
+  for(int i = 0; i < deathBall.size(); i++){
+    deathBall.get(i).show();
+    if(dist(Ball.getX(), Ball.getY(),deathBall.get(i).getX(),deathBall.get(i).getY()) < deathBall.get(i).getSize()){
+      //System.out.println("HIT!");
+    }
+  }
   for (int i = 0; i < backgroundStars.length; i++) {
     backgroundStars[i].move();
     backgroundStars[i].show();
@@ -46,6 +57,7 @@ public void draw()
   Ball.show();
   scaryBall.move();
   scaryBall.show();
+  
 }//-7 , 13
 public void keyReleased(){
   if(key == 'd' || key == 'D'){
