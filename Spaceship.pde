@@ -96,8 +96,6 @@ class Spaceship extends Floater
     myYspeed = 0;
     myPointDirection = 90;
   }
- 
-
   // my additions to the floater class (mainly getters and setters) 
   // ALSO there are only getters if i ever want to get a specific speed
   public void setXspeed(double speed) {
