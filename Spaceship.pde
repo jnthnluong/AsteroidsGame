@@ -83,6 +83,10 @@ class Spaceship extends Floater
      yCorners[10] = 50;
      
      */
+     for(int i = 0; i < corners; i++){
+       xCorners[i] = xCorners[i] + 10;
+       yCorners[i] = yCorners[i];
+     }
 
 
 
@@ -138,7 +142,8 @@ class Spaceship extends Floater
   {             
     fill(myColor);
     //noFill();
-    stroke(0);    
+    stroke(0);  
+    strokeWeight(1);
 
     //translate the (x,y) center of the ship to the correct position
     translate((float)myCenterX, (float)myCenterY);
@@ -162,15 +167,15 @@ class Spaceship extends Floater
       fill(247,161,47);
     
       //line(15,5,40,5);
-      rect(15,10,25,2.5);
-      rect(15,-10,25,2.5);
+      rect(15+10,10,25,2.5);
+      rect(15+10,-10,25,2.5);
     }
     if(movingB){
       stroke(247,161,47);
       fill(247,161,47);
       
-      rect(-40,15,25,2.5);
-      rect(-40,-15,25,2.5);
+      rect(-40+10,15,25,2.5);
+      rect(-40+10,-15,25,2.5);
     }
 
     //"unrotate" and "untranslate" in reverse order
