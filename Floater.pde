@@ -49,7 +49,8 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   {             
     fill(myColor);
     //noFill();
-    stroke(0);    
+    strokeWeight(2);
+    stroke(255);    
 
     //translate the (x,y) center of the ship to the correct position
     translate((float)myCenterX, (float)myCenterY);
@@ -77,5 +78,11 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   }
   public int getY() {
     return (int)myCenterY;
+  }
+  public int[] getXCorners(){
+    return xCorners;
+  }
+  public int[] getYCorners(){
+    return yCorners;
   }
 } 
