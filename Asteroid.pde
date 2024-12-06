@@ -1,22 +1,22 @@
 class Asteroid extends Floater {
   private double myRotationSpeed;
-  private int myAsteroidType,mySize;
+  private int myAsteroidType,myRadius;
   Asteroid() {
     myAsteroidType = (int)(Math.random()*2);
-    myRotationSpeed = 5;
+    myRotationSpeed = Math.random()*4-2;
     //myColor = color(157,133,133);
-    myColor = 255;
-    myCenterX = (int)(Math.random()*width);
-    myCenterY = (int)(Math.random()*height);
-    myXspeed = 4;
-    myYspeed = 4;
+    myColor = color(98,61,64);
+    myCenterX = (int)(Math.random()*width+width); // +width so that asteroids come from the side of the screen
+    myCenterY = (int)(Math.random()*height+height);
+    myXspeed = Math.random()*4-2;
+    myYspeed = (Math.random()*4-2);
     myPointDirection = (int)(Math.random()*360);
     myRotationSpeed = 1;
     corners = 5;
     xCorners = new int[corners];
     yCorners = new int[corners];
    // System.out.println(myAsteroidType);
-    if (myAsteroidType == 0) {
+    if (myAsteroidType == 0) { // just a little variation in each asteroid shape
       xCorners[0] = -40;
       yCorners[0] = 40;
 
@@ -49,20 +49,12 @@ class Asteroid extends Floater {
       xCorners[4] = -40;
       yCorners[4] = -20;
     }
-    int maxXDist = 0;
-    int maxYDist = 0;
-    for(int i = 0; i < corners; i++){ //bad, fix yes
-      if(xCorners[i] > maxXDist) maxXDist = xCorners[i];
-      if(yCorners[i] > maxYDist) maxYDist = yCorners[i];
-      
-    }
-    mySize = maxXDist*maxYDist;
+    
+   
 
-
-
-    for (int i = 0; i < corners; i++) {
-      xCorners[i] = xCorners[i]*(int)(Math.random()*3);
-      yCorners[i] = yCorners[i]*(int)(Math.random()*3);
+    for (int i = 0; i < corners; i++) { // makes every asteroid different
+      xCorners[i] = xCorners[i] + (int)(Math.random()*40-20);
+      yCorners[i] = yCorners[i] + (int)(Math.random()*40-20);
     }
     /*
       xCorners[0] = -20;
@@ -81,13 +73,22 @@ class Asteroid extends Floater {
      yCorners[4] = -20;
      */
   }
-  public int getSize(){
-    return mySize;
+ 
+  public int getRadius(){
+    return myRadius;
   }
   public void move() {
+    super.move();
+    super.turn(myRotationSpeed);
   }
 
-  public void turn() {
+  
+  
+  public int[] getXCorners(){
+    return xCorners;
+  }
+  public int [] getYCorners(){
+    return yCorners;
   }
 
   
