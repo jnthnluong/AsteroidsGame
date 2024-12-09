@@ -78,9 +78,8 @@ public void draw()
       ellipse(deathBallX, deathBallY, 2*(float)avgRadius, 2*(float)avgRadius);
     }
     if (dist(Ball.getX(), Ball.getY(), deathBallX, deathBallY) < avgRadius+40) {
-      System.out.println(i);
+      //System.out.println(i);
       deathBall.remove(i);
-      
       i--;
     }
   }
