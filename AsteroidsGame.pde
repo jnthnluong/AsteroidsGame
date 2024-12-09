@@ -32,7 +32,7 @@ public void setup()
    avgRadius +=temp;
    }
    avgRadius = avgRadius/xCorners.length;
-   //System.out.println(avgRadius);
+   System.out.println(avgRadius);
    */
 }
 
@@ -56,8 +56,6 @@ public void draw()
     deathBall.get(i).move();
     stroke(255);
     strokeWeight(2);
-
-
     deathBall.get(i).show();
     int deathBallX = deathBall.get(i).getX();
     int deathBallY = deathBall.get(i).getY();
@@ -70,11 +68,8 @@ public void draw()
       //System.out.println(temp);
       avgRadius += temp;
     }
-
     avgRadius = avgRadius/xCorners.length;
-
     //System.out.println(avgRadius);
-
     if (hitBoxEnabled) {
       fill(255);
       ellipse(deathBallX, deathBallY, 5, 5);
@@ -83,8 +78,9 @@ public void draw()
       ellipse(deathBallX, deathBallY, 2*(float)avgRadius, 2*(float)avgRadius);
     }
     if (dist(Ball.getX(), Ball.getY(), deathBallX, deathBallY) < avgRadius+40) {
-      //System.out.println(i);
+      System.out.println(i);
       deathBall.remove(i);
+      
       i--;
     }
   }
