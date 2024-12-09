@@ -52,7 +52,7 @@ public void draw()
     noStroke();
     ellipse(Ball.getX(), Ball.getY(), 80, 80);
   }
-  for (int i = 0; i < deathBall.size(); i++) {
+  for (int i = deathBall.size()-1; i >=0; i--) { //start at largest index to address arraylist trap
     deathBall.get(i).move();
     stroke(255);
     strokeWeight(2);
@@ -77,10 +77,10 @@ public void draw()
       noStroke();
       ellipse(deathBallX, deathBallY, 2*(float)avgRadius, 2*(float)avgRadius);
     }
-    if (dist(Ball.getX(), Ball.getY(), deathBallX, deathBallY) < avgRadius+40) {
+    if (dist(Ball.getX(), Ball.getY(), deathBallX, deathBallY) < avgRadius+40) {//40 == radius of spaceship
       //System.out.println(i);
       deathBall.remove(i);
-      i--;
+
     }
   }
 
