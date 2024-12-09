@@ -49,7 +49,7 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   {             
     fill(myColor);
     //noFill();
-    strokeWeight(2);
+    strokeWeight(0.5);
     stroke(255);    
 
     //translate the (x,y) center of the ship to the correct position
