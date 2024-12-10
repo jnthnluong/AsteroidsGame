@@ -1,7 +1,8 @@
 class Asteroid extends Floater {
-  private double myRotationSpeed;
-  private int myAsteroidType,myRadius;
+  private double myRotationSpeed,myAvgRadius;
+  private int myAsteroidType;
   Asteroid() {
+   
     myAsteroidType = (int)(Math.random()*2);
     myRotationSpeed = Math.random()*4-2;
     //myColor = color(157,133,133);
@@ -56,6 +57,14 @@ class Asteroid extends Floater {
       xCorners[i] = xCorners[i] + (int)(Math.random()*40-20);
       yCorners[i] = yCorners[i] + (int)(Math.random()*40-20);
     }
+    double avgRadius = 0;
+    for (int g = 0; g < xCorners.length; g++) {
+      double temp = dist((float)myCenterX,(float)myCenterY,(float)(xCorners[g]+myCenterX), (float)(yCorners[g]+myCenterY));
+      //System.out.println(temp);
+      avgRadius += temp;
+    }
+    myAvgRadius = avgRadius/5;
+    //System.out.println(myAvgRadius);
     /*
       xCorners[0] = -20;
      yCorners[0] = 20;
@@ -74,8 +83,8 @@ class Asteroid extends Floater {
      */
   }
  
-  public int getRadius(){
-    return myRadius;
+  public double getRadius(){
+    return myAvgRadius;
   }
   public void move() {
     super.move();
