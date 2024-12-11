@@ -51,8 +51,6 @@ class Asteroid extends Floater {
       yCorners[4] = -20;
     }
     
-   
-
     for (int i = 0; i < corners; i++) { // makes every asteroid different
       xCorners[i] = xCorners[i] + (int)(Math.random()*40-20);
       yCorners[i] = yCorners[i] + (int)(Math.random()*40-20);
@@ -65,24 +63,47 @@ class Asteroid extends Floater {
     }
     myAvgRadius = avgRadius/5;
     //System.out.println(myAvgRadius);
-    /*
-      xCorners[0] = -20;
-     yCorners[0] = 20;
-     
-     xCorners[1] = 20;
-     yCorners[1] = 20;
-     
-     xCorners[2] = 40;
-     yCorners[2] = 0;
-     
-     xCorners[3] = 0;
-     yCorners[3] = -20;
-     
-     xCorners[4] = -40;
-     yCorners[4] = -20;
-     */
+   
+  }// end of normal asteroid constructor
+  Asteroid(Spaceship theShip){ //dead ship
+    myXspeed = 0;
+    myYspeed = 0;
+    myCenterX = theShip.getX();
+    myCenterY = theShip.getY();
+    myPointDirection = theShip.getDirection();
+    
+    
+    corners = 7;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = -60;
+    yCorners[0] = 0;
+    
+    xCorners[1] = -40;
+    yCorners[1] = 20;
+    
+    xCorners[2] = 0;
+    yCorners[2] = 40;
+    
+    xCorners[3] = 40;
+    yCorners[3] = 20;
+    
+    xCorners[4] = 40;
+    yCorners[4] = 0;
+    
+    xCorners[5] = 20;
+    yCorners[5] = -20;
+    
+    xCorners[6] = -40;
+    yCorners[6] = -20;
+    
   }
- 
+ public void setX(int x){
+   myCenterX = x;
+ }
+ public void setY(int y){
+   myCenterY = y;
+ }
   public double getRadius(){
     return myAvgRadius;
   }
@@ -98,6 +119,15 @@ class Asteroid extends Floater {
   }
   public int [] getYCorners(){
     return yCorners;
+  }
+  public void setColor(color a){
+    myColor = a;
+  }
+   public void setXspeed(double x){
+    myXspeed = x;
+  }
+  public void setYspeed(double y){
+    myYspeed = y;
   }
 
   
