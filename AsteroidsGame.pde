@@ -6,19 +6,23 @@ ArrayList<Asteroid> deathBall = new ArrayList<Asteroid>();
 public boolean rotatingR = false;
 public boolean rotatingL = false;
 ArrayList<Bullet> PewPew = new ArrayList<Bullet>();
-public int shootingCooldown = 15;
-
-
+public double health = 100;
+public double shootingCooldown = 0.5; //x/60 second cooldown to shoot
+public boolean isAlive = true;
+Asteroid deadShip;
 public void setup() 
 {
   size(800, 800);
   background(0);
+  rect(50, 50, 150, 50);
   //Loop();
   //your code here
 
   Ball = new Spaceship();
   Ball.setXspeed(0);
   Ball.setYspeed(0);
+  deadShip = new Asteroid(Ball);
+
 
   for (int i = 0; i <backgroundStars.length; i++) {
     backgroundStars[i] = new Star();
@@ -34,32 +38,48 @@ public void setup()
    avgRadius = avgRadius/xCorners.length;
    System.out.println(avgRadius);
    */
-   shootingCooldown = 0;
+  shootingCooldown = 0.5;
 }
+
 
 public void draw() 
 {
+  if (health<=0)isAlive = false;
   strokeWeight(1);
-  if ((int)(Math.random()*100) == 1) {
+  if ((int)(Math.random()*100) == 1 && isAlive) {
     deathBall.add(new Asteroid());
   }
+
   background(0);
+  //deadShip.show();
+  if (!isAlive) {
+    for (int i = deathBall.size()-1; i >= 0; i--) {
+      deathBall.remove(i);
+    }
+    Ball.setXspeed(3);
+    Ball.setYspeed(3);
+    deadShip.setX(Ball.getX());
+    deadShip.setY(Ball.getY());
+    deadShip.setColor(color(175, 168, 168));
+    fill(175, 168, 168);
+    deadShip.show();
+    //System.out.println("dead");
+  }
   for (int i = 0; i < backgroundStars.length; i++) {
     backgroundStars[i].move();
     backgroundStars[i].show();
   }
-  if(isShooting && shootingCooldown <= 0){
+  if (isShooting && shootingCooldown <= 0 && isAlive) {
     PewPew.add(new Bullet(Ball));
-    shootingCooldown = 15;
-  }else{
+    shootingCooldown = 0.5;
+  } else {
     shootingCooldown--;
   }
-  for (int i = PewPew.size()-1; i >=0 ; i--) {
+  for (int i = PewPew.size()-1; i >=0; i--) {
     PewPew.get(i).move();
     PewPew.get(i).show();
-    if(PewPew.get(i).getTimer() > 240){
+    if (PewPew.get(i).getTimer() > 240) {
       PewPew.remove(i);
-      
     }
     fill(255, 0, 0, 100);
     //ellipse(PewPew.get(i).getX(), PewPew.get(i).getY(), 2.5, 2.5);
@@ -88,28 +108,26 @@ public void draw()
       noStroke();
       ellipse(deathBallX, deathBallY, 2*(float)avgRadius, 2*(float)avgRadius);
     }
-    if (dist(Ball.getX(), Ball.getY(), deathBallX, deathBallY) < avgRadius+40) {//40 == radius of spaceship
-      //System.out.println(i);
-      deathBall.remove(i);
-    }
-    for (int g = PewPew.size()-1; g >= 0; g--) {
-      if (dist(PewPew.get(g).getX(), PewPew.get(g).getY(), deathBallX, deathBallY) < avgRadius+20) { //+20 so that bullets can easily hit asteroids
-        //System.out.println(dist(PewPew.get(g).getX(), PewPew.get(g).getY(), deathBallX, deathBallY));
-        //System.out.println("shot"+g);
-        // for some reason an error(index out of bounds) occurs
-        if(deathBall.size() > 0){
-          deathBall.remove(i);
-        }
-          
-          
-        
-        
-        //i--;
-        PewPew.remove(g);
-       
+    if (isAlive) {
+      if (dist(Ball.getX(), Ball.getY(), deathBallX, deathBallY) < avgRadius+40) {//40 == radius of spaceship
+        //System.out.println(i);
+        health-=5;
+        deathBall.remove(i);
       }
     }
-  }
+
+    for (int g = PewPew.size()-1; g >= 0; g--) {
+      if (dist(PewPew.get(g).getX(), PewPew.get(g).getY(), deathBallX, deathBallY) < avgRadius+15) { //+10 so that bullets can easily hit asteroids
+        //System.out.println(dist(PewPew.get(g).getX(), PewPew.get(g).getY(), deathBallX, deathBallY));
+        //System.out.println("shot"+g);
+        // for some reason an error(index out of bounds) occurs w/o the break at the end?
+
+        deathBall.remove(i);
+        PewPew.remove(g);
+        break; //
+      }
+    }
+  } // end of asteroid collision check
 
   if (rotatingR) {
     Ball.turn(5);
@@ -117,19 +135,26 @@ public void draw()
   if (rotatingL) {
     Ball.turn(-5);
   }
-  if (Ball.isForward()) {
+  if (Ball.isForward() && isAlive) {
     Ball.accelerate(-0.25/2);
   }
-  if (Ball.isBackward()) {
+  if (Ball.isBackward() && isAlive  ) {
     Ball.accelerate(0.25/2);
   }
   //your code here
   Ball.move();
-  Ball.show();
+
+  if (isAlive) {
+    Ball.show();
+  }
+  if (health <= 0) health = 0;
+  noStroke();
+  fill(0, 255, 0);
+  rect(50, 50, (float)(3*health), 25);
 }//-7 , 13
 boolean isShooting = false;
 public void keyReleased() {
-  if(key == 'n' || key == 'N'){
+  if (key == 'n' || key == 'N') {
     isShooting = false;
   }
 
@@ -150,10 +175,9 @@ private boolean hitBoxEnabled = false;
 public void keyPressed() {
   if (key == 'n' || key == 'N') {
     isShooting = true;
-    
   }  
-  if(key == 'j'){
-    for(int i = 0; i < 150; i++){
+  if (key == 'j') {
+    for (int i = 0; i < 150; i++) {
       deathBall.add(new Asteroid());
     }
   }
@@ -165,22 +189,22 @@ public void keyPressed() {
     }
   }
   //System.out.println(key);
-  if (key == 'w' || key == 'W') {
+  if (key == 'w' || key == 'W' && isAlive) {
     //Ball.accelerate(-2.5);
     Ball.setForward(true);
   }
-  if (key == 'd' || key == 'D') {
+  if (key == 'd' || key == 'D'&& isAlive) {
     //Ball.turn(5);
     rotatingR = true;
   }
-  if (key == 'a' || key == 'A') {
+  if (key == 'a' || key == 'A' && isAlive) {
     //Ball.turn(-5);
     rotatingL = true;
   }
-  if (key == 's' || key == 'S') {
+  if (key == 's' || key == 'S' && isAlive) {
     Ball.setBackward(true);
   }  
-  if (keyCode == 32) { //spacebar
+  if (keyCode == 32 && isAlive) { //spacebar
     //fill(Ball.getColor(), 100);
     Ball.setXspeed(0);
     Ball.setYspeed(0);
