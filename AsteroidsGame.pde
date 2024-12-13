@@ -57,15 +57,15 @@ public void draw()
     for (int i = deathBall.size()-1; i >= 0; i--) {
       deathBall.remove(i);
     }
-  
-    deadShip.setXspeed(Ball.getXspeed()/2);
-    deadShip.setYspeed(Ball.getYspeed()/2);
-if(setLost = false){
 
-    deadShip.setX(Ball.getX());
-    deadShip.setY(Ball.getY());
-setLost = true;
-}
+
+    if (setLost == false) {
+      deadShip.setXspeed(Ball.getXspeed()/2);
+      deadShip.setYspeed(Ball.getYspeed()/2);
+      deadShip.setX(Ball.getX());
+      deadShip.setY(Ball.getY());
+      setLost = true;
+    }
     deadShip.setColor(color(175, 168, 168));
     fill(175, 168, 168);
     deadShip.show();
@@ -118,7 +118,7 @@ setLost = true;
       if (dist(Ball.getX(), Ball.getY(), deathBallX, deathBallY) < avgRadius+40) {//40 == radius of spaceship
         //System.out.println(i);
         health-=5;
-        if(health<=0){
+        if (health<=0) {
           Ball.setXspeed(Ball.getXspeed()/2);
           Ball.setYspeed(Ball.getYspeed()/2);
         }
