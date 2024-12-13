@@ -68,6 +68,7 @@ public void draw()
     }
     deadShip.setColor(color(175, 168, 168));
     fill(175, 168, 168);
+    deadShip.move();
     deadShip.show();
     //System.out.println("dead");
   }
