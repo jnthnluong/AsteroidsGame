@@ -10,6 +10,7 @@ public double health = 100;
 public double shootingCooldown = 0.5; //x/60 second cooldown to shoot
 public boolean isAlive = true;
 Asteroid deadShip;
+public boolean setLost = false;
 public void setup() 
 {
   size(800, 800);
@@ -57,10 +58,14 @@ public void draw()
       deathBall.remove(i);
     }
   
-    Ball.setXspeed(Ball.getXspeed());
-    Ball.setYspeed(Ball.getYspeed());
+    deadShip.setXspeed(Ball.getXspeed()/2);
+    deadShip.setYspeed(Ball.getYspeed()/2);
+if(setLost = false){
+
     deadShip.setX(Ball.getX());
     deadShip.setY(Ball.getY());
+setLost = true;
+}
     deadShip.setColor(color(175, 168, 168));
     fill(175, 168, 168);
     deadShip.show();
